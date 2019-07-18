@@ -26,9 +26,14 @@ describe('calculator functionality', function() {
 
   });
 
-  // it('should update the display with the result of the operation after arithmetical operations', function(){
-  //
-  // });
+  it('should update display ok after arithmetic ops', function(){
+    // should update the display with the result of the operation after arithmetical operations
+    element(by.css('#number5')).click();
+    element(by.css('#operator_multiply')).click();
+    element(by.css('#number8')).click();
+    element(by.css('#operator_equals')).click();
+    expect(running_total.getAttribute('value')).to.eventually.equal('40')
+  });
   // it('should chain multiple operations together', function(){
   //
   // });
