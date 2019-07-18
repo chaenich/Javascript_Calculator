@@ -91,9 +91,12 @@ describe('calculator functionality', function() {
     expect(running_total.getAttribute('value')).to.eventually.equal('400000000');
   });
 
-  //
-  // it('should display Not a number if a numberis divided by zero', function(){
-  //
-  // });
+  it('should display Not a number if a number is divided by zero', function(){
+    element(by.css('#number1')).click();
+    element(by.css('#operator_divide')).click();
+    element(by.css('#number0')).click();
+    element(by.css('#operator_equals')).click();
+    expect(running_total.getAttribute('value')).to.eventually.equal('Not a number');
+  });
 
 });

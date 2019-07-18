@@ -20,7 +20,16 @@ Calculator.prototype = {
   },
 
   divide: function(number){
-    this.runningTotal = parseFloat(this.previousTotal) / parseFloat(number);
+    // Divide by zero
+    if (this.previousOperator == '/' && this.runningTotal == 0) {
+      this.runningTotal = 'Not a number';
+      //Treat this as an == sign entry as need to start with new calculation
+      this.previousOperator = null;
+      this.previousTotal = null;
+      this.newTotal = false;
+    } else {
+      this.runningTotal = parseFloat(this.previousTotal) / parseFloat(number);
+    }
   },
 
   numberClick: function(number) {
@@ -35,13 +44,13 @@ Calculator.prototype = {
     }
     // concatenate the clicked number to the running total
     this.runningTotal = parseFloat('' + this.runningTotal + number);
-
   },
 
   operatorClick: function(operator) {
 
     // if there was a previous operator recorded as having been clicked, perform
     // the operation for the previous operator
+
     if (this.previousTotal && this.previousOperator) {
       switch (this.previousOperator) {
         case ('+'):
@@ -58,7 +67,6 @@ Calculator.prototype = {
         break;
       }
     }
-
     // if the 'equals' button was clicked, clear the previous operator, otherwise
     // record what the previous operator was
     if (operator == '=') {
@@ -66,15 +74,16 @@ Calculator.prototype = {
     } else {
       this.previousOperator = operator;
     }
+
     // replace the previous total with the current running total and flag that a
     // new total has been calculated
-
     this.previousTotal = this.runningTotal;
     this.newTotal = true;
   },
 
   clearClick: function() {
-    if (this.runningTotal == 0) {
+    // Cater for decide by zero errors
+    if (this.runningTotal == 0 || this.runningTotal == 'Not a number') {
       this.previousOperator = null;
       this.previousTotal = null;
     }
