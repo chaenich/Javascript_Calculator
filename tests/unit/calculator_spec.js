@@ -38,5 +38,25 @@ describe('calculator', function () {
     calculator.numberClick("3");
     assert.equal(calculator.runningTotal, "123");
   });
+  it('it should chain multiple operations together', function(){
+    // Enter 1 + 5 - 3 + 11 / 2 * 3 gives 21
+    calculator.numberClick("1");
+    calculator.operatorClick("+");
+    calculator.numberClick("5");
+    calculator.operatorClick("-");
+    calculator.numberClick("3");
+    calculator.operatorClick("+");
+    calculator.numberClick("11");
+    calculator.operatorClick("/");
+    calculator.numberClick("2");
+    calculator.operatorClick("*");
+    calculator.numberClick("3");
+    calculator.operatorClick("=");
+    assert.equal(calculator.runningTotal, "21");
+  });
+  // it('it should clear the running total without affecting the calculation', function(){
+  //
+  //   assert.equal()
+  // });
 
 });
