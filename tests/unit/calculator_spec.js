@@ -38,8 +38,9 @@ describe('calculator', function () {
     calculator.numberClick("3");
     assert.equal(calculator.runningTotal, "123");
   });
+
   it('it should chain multiple operations together', function(){
-    // Enter 1 + 5 - 3 + 11 / 2 * 3 gives 21
+    // Enter 1 + 5 - 3 + 11 / 2 * 3 = gives 21
     calculator.numberClick("1");
     calculator.operatorClick("+");
     calculator.numberClick("5");
@@ -54,9 +55,17 @@ describe('calculator', function () {
     calculator.operatorClick("=");
     assert.equal(calculator.runningTotal, "21");
   });
-  // it('it should clear the running total without affecting the calculation', function(){
-  //
-  //   assert.equal()
-  // });
 
+  it('it should clear the running total without affecting the calculation', function(){
+    // Enter 3 * 6 / 2 <clr> 9 = gives 2
+    calculator.numberClick("3");
+    calculator.operatorClick("*");
+    calculator.numberClick("6");
+    calculator.operatorClick("/");
+    calculator.numberClick("2");
+    calculator.clearClick();
+    calculator.numberClick("9");
+    calculator.operatorClick("=");
+    assert.equal(calculator.previousTotal, "2");
+  });
 });
