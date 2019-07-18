@@ -11,18 +11,18 @@ describe('calculator functionality', function() {
 
   // write integration tests here in the form of "it should do something..."
   it('should have working number buttons', function(){
-    running_total = element(by.css('#running_total'))
+    running_total = element(by.css('#running_total'));
     element(by.css('#number2')).click();
-    expect(running_total.getAttribute('value')).to.eventually.equal('2')
+    expect(running_total.getAttribute('value')).to.eventually.equal('2');
   });
 
   it('should update the display of the running total', function(){
     // should update the display of the running total when number buttons pressed
-    running_total = element(by.css('#running_total'))
+    running_total = element(by.css('#running_total'));
     element(by.css('#number5')).click();
     element(by.css('#number7')).click();
     element(by.css('#number8')).click();
-    expect(running_total.getAttribute('value')).to.eventually.equal('578')
+    expect(running_total.getAttribute('value')).to.eventually.equal('578');
 
   });
 
@@ -32,7 +32,7 @@ describe('calculator functionality', function() {
     element(by.css('#operator_multiply')).click();
     element(by.css('#number8')).click();
     element(by.css('#operator_equals')).click();
-    expect(running_total.getAttribute('value')).to.eventually.equal('40')
+    expect(running_total.getAttribute('value')).to.eventually.equal('40');
   });
 
   it('should chain multiple operations together', function(){
@@ -47,13 +47,50 @@ describe('calculator functionality', function() {
     element(by.css('#operator_subtract')).click();
     element(by.css('#number1')).click();
     element(by.css('#operator_equals')).click();
-    expect(running_total.getAttribute('value')).to.eventually.equal('1')
+    expect(running_total.getAttribute('value')).to.eventually.equal('1');
   });
 
-  // it('should provide expected output for a range of numbers', function(){
-  //   // Is the output as expected for a range of numbers (for example, positive, negative, decimals and very large numbers)?
-  //
-  // });
+  // Is the output as expected for a range of numbers (for example, positive, negative, decimals and very large numbers)?
+  it('should provide expected output for positive numbers', function(){
+    element(by.css('#number5')).click();
+    element(by.css('#number0')).click();
+    element(by.css('#operator_multiply')).click();
+    element(by.css('#number8')).click();
+    element(by.css('#operator_equals')).click();
+    expect(running_total.getAttribute('value')).to.eventually.equal('400');
+  });
+  it('should provide expected output for negative numbers', function(){
+    element(by.css('#number8')).click();
+    element(by.css('#operator_subtract')).click();
+    element(by.css('#number2')).click();
+    element(by.css('#number1')).click();
+    element(by.css('#number1')).click();
+    element(by.css('#operator_equals')).click();
+    expect(running_total.getAttribute('value')).to.eventually.equal('-203');
+  });
+  it('should provide expected output for decimal numbers', function(){
+    element(by.css('#number8')).click();
+    element(by.css('#operator_divide')).click();
+    element(by.css('#number3')).click();
+    element(by.css('#number2')).click();
+    element(by.css('#operator_equals')).click();
+    expect(running_total.getAttribute('value')).to.eventually.equal('0.25');
+  });
+  it('should provide expected output for large numbers', function(){
+    element(by.css('#number5')).click();
+    element(by.css('#number0')).click();
+    element(by.css('#number0')).click();
+    element(by.css('#number0')).click();
+    element(by.css('#operator_multiply')).click();
+    element(by.css('#number8')).click();
+    element(by.css('#number0')).click();
+    element(by.css('#number0')).click();
+    element(by.css('#number0')).click();
+    element(by.css('#number0')).click();
+    element(by.css('#operator_equals')).click();
+    expect(running_total.getAttribute('value')).to.eventually.equal('400000000');
+  });
+
   //
   // it('should display Not a number if a numberis divided by zero', function(){
   //
