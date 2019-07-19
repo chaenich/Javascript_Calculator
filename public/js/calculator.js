@@ -23,10 +23,9 @@ Calculator.prototype = {
     // Divide by zero
     if (this.previousOperator == '/' && this.runningTotal == 0) {
       this.runningTotal = 'Not a number';
-      //Treat this as an == sign entry as need to start with new calculation
+      //Treat this as an = sign entry as need to start with new calculation
       this.previousOperator = null;
       this.previousTotal = null;
-      this.newTotal = false;
     } else {
       this.runningTotal = parseFloat(this.previousTotal) / parseFloat(number);
     }
